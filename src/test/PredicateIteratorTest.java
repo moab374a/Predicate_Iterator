@@ -30,7 +30,7 @@ public class PredicateIteratorTest {
 
     @Test
     public void providesValuesEndingWithJava() {
-        assertTrue(valuesEndingWithJava.hasNext());
+         assertTrue(valuesEndingWithJava.hasNext());
         assertEquals("UML and Java", valuesEndingWithJava.next());
         assertTrue(valuesEndingWithJava.hasNext());
         assertEquals("Effective Java", valuesEndingWithJava.next());

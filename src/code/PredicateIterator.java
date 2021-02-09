@@ -1,19 +1,19 @@
 package code;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class PredicateIterator<T> implements Iterator<T> {
 
     private Predicate predicate;
-    private Iterator<T> iter;
+
+    private ListIterator<T> iter;
+    private T varaible;
+
 
     public PredicateIterator(Iterator<T> iter, Predicate<T> predicate) {
         if (iter == null || predicate == null) throw new NoSuchElementException();
         this.predicate = predicate;
-        this.iter = iter;
+        this.iter = (ListIterator<T>) iter;
 
 
     }
@@ -22,16 +22,32 @@ public class PredicateIterator<T> implements Iterator<T> {
     public boolean hasNext() {
         if (iter == null) throw new NoSuchElementException();
 
-       if (!predicate.test(iter.hasNext()))throw new NoSuchElementException();
-        return iter.hasNext();
+        while (iter.hasNext())
+        {
+            if(predicate.test(iter.next()))
+            {
+                iter.hasPrevious();
+            }
+        }
+        return false;
     }
 
     @Override
     public T next() {
-        if (!predicate.test(iter.next())) throw new NoSuchElementException();
-        if (iter.next() == null) throw new NoSuchElementException();
+        T temp;
+        while(iter.hasNext()){
+            temp = iter.next();
+            if (predicate.test(iter.next())){
+                return temp;
+            }
+        }
 
-        return iter.next();
+        throw new NoSuchElementException();
+    }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
     }
 
 }
