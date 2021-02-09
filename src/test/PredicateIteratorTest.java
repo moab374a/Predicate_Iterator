@@ -23,14 +23,14 @@ public class PredicateIteratorTest {
 
     @Before
     public void setUp() {
-        valuesEndingWithJava = new PredicateIterator<>(values.iterator(), new EndsWith("Java"));
-        valuesBeginningWithJava = new PredicateIterator<>(values.iterator(), new StartsWith("Java"));
-        noValues = new PredicateIterator<>(values.iterator(), new StartsWith("Doesn't match"));
+        valuesEndingWithJava = new PredicateIterator<>(values.iterator() , new EndsWith("Java"));
+        valuesBeginningWithJava = new PredicateIterator<>(values.iterator() , new StartsWith("Java"));
+        noValues = new PredicateIterator<>(values.iterator() , new StartsWith("Doesn't match"));
     }
 
     @Test
     public void providesValuesEndingWithJava() {
-         assertTrue(valuesEndingWithJava.hasNext());
+        assertTrue(valuesEndingWithJava.hasNext());
         assertEquals("UML and Java", valuesEndingWithJava.next());
         assertTrue(valuesEndingWithJava.hasNext());
         assertEquals("Effective Java", valuesEndingWithJava.next());

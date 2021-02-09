@@ -8,33 +8,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-       // List<String> values = List.of("Java and UML", "UML and Java", "Java 11", "UML 2.0", "Effective Java");
+        List<String> values = List.of("Java and UML", "UML and Java", "Java 11", "UML 2.0", "Effective Java");
 ;
 
-/*
         Iterator<String> valuesEndingWithJava= values.iterator();
         Iterator<String> valuesBeginningWithJava =values.iterator();
         Iterator<String> noValues= values.iterator();
-        */
 
 
 
-      /*  PredicateIterator begin= new PredicateIterator(valuesBeginningWithJava,start);
-        PredicateIterator  finish = new PredicateIterator(valuesEndingWithJava,end);
-        PredicateIterator length = new PredicateIterator(noValues,lengthIs);*/
+        PredicateIterator  finish = new PredicateIterator(valuesEndingWithJava,new EndsWith<>("Java"));
 
-        // The compared Values
-        Predicate<String> start = new StartsWith<>("java");
-        Predicate<String> end = new EndsWith<>("va");
-        Predicate<String>  lengthIs = new HasLength<>(4);
+        PredicateIterator begin= new PredicateIterator(valuesBeginningWithJava,new StartsWith<>("Java"));
 
-        System.out.println(start.test("ja"));
-        System.out.println(end.test("va"));
-        System.out.println(lengthIs.test("java"));
+        PredicateIterator length = new PredicateIterator(noValues,new HasLength<>(4));
 
-        String suffix= "";
-        String value= "Hello";
-        System.out.println("-> "+suffix.endsWith(value));
+
+
+        System.out.println(begin.next());
+        System.out.println(begin.next());
+        System.out.println(begin.hasNext());
+
+
 
     }
 }

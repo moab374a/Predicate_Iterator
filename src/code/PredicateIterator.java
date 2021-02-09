@@ -6,27 +6,31 @@ public class PredicateIterator<T> implements Iterator<T> {
 
     private Predicate predicate;
 
-    private ListIterator<T> iter;
-    private T varaible;
-
+    private Iterator<T> iter;
+    private T type;
+    private boolean test = false;
 
     public PredicateIterator(Iterator<T> iter, Predicate<T> predicate) {
         if (iter == null || predicate == null) throw new NoSuchElementException();
         this.predicate = predicate;
-        this.iter = (ListIterator<T>) iter;
+        this.iter =  iter;
 
 
     }
+
+    //TODO: ->  "Java and UML", ->  "UML and Java", ->    "Java 11", ->   "UML 2.0",  ->  "Effective Java"
 
     @Override
     public boolean hasNext() {
         if (iter == null) throw new NoSuchElementException();
 
-        while (iter.hasNext())
-        {
-            if(predicate.test(iter.next()))
-            {
-                iter.hasPrevious();
+        while (iter.hasNext()) {
+
+            type = iter.next();
+
+            if (predicate.test(type)) {
+                test = true;
+                return true;
             }
         }
         return false;
@@ -34,20 +38,28 @@ public class PredicateIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        T temp;
-        while(iter.hasNext()){
-            temp = iter.next();
-            if (predicate.test(iter.next())){
-                return temp;
-            }
+
+        if (iter == null) throw new NoSuchElementException();
+        if ( !test && type == null) { // if he didn't call hasNext first
+           hasNext();
+
+            T newTyp = type;
+            type = null;
+            test = false;
+            return newTyp;
         }
+        else if (type != null) {
 
+            T newTyp = type;
+            type = null;
+            test = false;
+            return newTyp;
+        }
         throw new NoSuchElementException();
-    }
 
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
 
+
+
+
+    }
 }

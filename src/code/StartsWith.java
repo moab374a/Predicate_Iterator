@@ -15,10 +15,8 @@ public class StartsWith<T> implements Predicate<String>{
 
 
         if (value == null) return false;
-        else if (!prefix.isEmpty() && value.isEmpty()) return false;
-        else if (prefix.isEmpty()) return true;
 
-        return prefix.startsWith(value) ;
+        return value.startsWith(prefix) ;
     }
 
 
