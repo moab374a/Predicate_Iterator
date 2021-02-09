@@ -13,7 +13,6 @@ public class EndsWith<T> implements Predicate<String> {
     @Override
     public boolean test(String value) {
         if (value == null) return false;
-
         return value.endsWith(suffix);
     }
 }

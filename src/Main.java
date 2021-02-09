@@ -32,5 +32,9 @@ public class Main {
         System.out.println(end.test("va"));
         System.out.println(lengthIs.test("java"));
 
+        String suffix= "";
+        String value= "Hello";
+        System.out.println("-> "+suffix.endsWith(value));
+
     }
 }
