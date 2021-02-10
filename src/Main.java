@@ -24,12 +24,7 @@ public class Main {
         PredicateIterator length = new PredicateIterator(noValues,new HasLength<>(4));
 
 
-
-        System.out.println(begin.next());
-        System.out.println(begin.next());
-        System.out.println(begin.hasNext());
-
-
+    
 
     }
 }

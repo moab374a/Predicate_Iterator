@@ -18,10 +18,10 @@ public class PredicateIterator<T> implements Iterator<T> {
 
     }
 
-    //TODO: ->  "Java and UML", ->  "UML and Java", ->    "Java 11", ->   "UML 2.0",  ->  "Effective Java"
 
     @Override
     public boolean hasNext() {
+
         if (iter == null) throw new NoSuchElementException();
 
         while (iter.hasNext()) {
@@ -39,16 +39,17 @@ public class PredicateIterator<T> implements Iterator<T> {
     @Override
     public T next() {
 
-        if (iter == null) throw new NoSuchElementException();
-        if ( !test && type == null) { // if he didn't call hasNext first
-           hasNext();
+        if (!test) {
 
-            T newTyp = type;
-            type = null;
-            test = false;
-            return newTyp;
+            if ( hasNext()) {
+                T newTyp = type;
+                type = null;
+                test = false;
+               return newTyp;
+            }
         }
-        else if (type != null) {
+
+       else  if (type != null) {
 
             T newTyp = type;
             type = null;
@@ -56,10 +57,6 @@ public class PredicateIterator<T> implements Iterator<T> {
             return newTyp;
         }
         throw new NoSuchElementException();
-
-
-
-
 
     }
 }
